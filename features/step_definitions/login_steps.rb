@@ -1,17 +1,29 @@
 When(/^I am on Appimation login page/) do
   visit('/')
 
-# test by checing is elements are present
-  puts find(:id, 'start_button').visible? ? "Try now button found" : "Try now button not found"  # find_button('Try now').text
-  puts find(:id, 'signup-b').visible? ? "Sign up button found" : "Sign up button not found"
-  puts find(:id, 'cta').visible? ? "Contact Us section found" : "Contact Us section not found"
-  puts find(:xpath, '//*[@id="name"]').visible? ? "Contact Us \"Name input\" found" : "Contact Us \"Name input\" not found"
-  puts find(:xpath, '//*[@id="email"]').visible? ? "Contact Us \"E-mail input\" found" : "Contact Us \"E-mail input\" not found"
-  puts find(:xpath, '//*[@id="contactus-message"]').visible? ? "Contact Us \"Message input \" found" : "Contact Us \"Message input\" not found"
-  puts find(:xpath, '//*[@id="contactus-button"]').visible? ? "Contact Us \"Send\" button found" : "Contact Us \"Send\" button not found"
+# Check if elements are present
+  find(:id, 'start_button').visible?
+  find(:id, 'signup-b').visible?
+  find(:id, 'cta').visible?
+  find(:xpath, '//*[@id="name"]').visible?
+  find(:xpath, '//*[@id="email"]').visible?
+  find(:xpath, '//*[@id="contactus-message"]').visible?
+  find(:xpath, '//*[@id="contactus-button"]').visible?
   all(:xpath, '//*[contains(@class, \'box special features\')]/descendant::section/h3').each.with_index(1) do |el, i|
-    puts el.visible? ? "Feature #{i} found: " + el.text : "Feature #{i} not found"
+    el.visible?
   end
+
+# Check if elements are present with text
+  # puts find(:id, 'start_button').visible? ? "Try now button found" : "Try now button not found"  # find_button('Try now').text
+  # puts find(:id, 'signup-b').visible? ? "Sign up button found" : "Sign up button not found"
+  # puts find(:id, 'cta').visible? ? "Contact Us section found" : "Contact Us section not found"
+  # puts find(:xpath, '//*[@id="name"]').visible? ? "Contact Us \"Name input\" found" : "Contact Us \"Name input\" not found"
+  # puts find(:xpath, '//*[@id="email"]').visible? ? "Contact Us \"E-mail input\" found" : "Contact Us \"E-mail input\" not found"
+  # puts find(:xpath, '//*[@id="contactus-message"]').visible? ? "Contact Us \"Message input \" found" : "Contact Us \"Message input\" not found"
+  # puts find(:xpath, '//*[@id="contactus-button"]').visible? ? "Contact Us \"Send\" button found" : "Contact Us \"Send\" button not found"
+  # all(:xpath, '//*[contains(@class, \'box special features\')]/descendant::section/h3').each.with_index(1) do |el, i|
+  #   puts el.visible? ? "Feature #{i} found: " + el.text : "Feature #{i} not found"
+  # end
 
   # find(:xpath, '//*[@id="name"]').set('Roberts Apškrūms')
   # find(:xpath, '//*[@id="email"]').set('roberts.apskrums@testdevlab.com')
