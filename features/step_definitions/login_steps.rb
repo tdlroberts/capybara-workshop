@@ -9,7 +9,7 @@ When(/^I am on Appimation login page/) do
   find(:xpath, '//*[@id="email"]').visible?
   find(:xpath, '//*[@id="contactus-message"]').visible?
   find(:xpath, '//*[@id="contactus-button"]').visible?
-  all(:xpath, '//*[contains(@class, \'box special features\')]/descendant::section/h3').each.with_index(1) do |el, i|
+  all(:xpath, '//*[contains(@class, \'box special features\')]/descendant::section/h3').each do |el|
     el.visible?
   end
 
