@@ -1,26 +1,60 @@
-When(/^I am on Appimation home page/) do
+Given(/^I am on Appimation home page/) do
   visit('/')  # open root domain
-  find(:id, 'start_button').visible?
-  find(:id, 'login-b').visible?
-  find(:id, 'signup-b').visible?
 end
 
-Then(/^I click Try Now/) do
-  find(:id, 'start_button').click
-end
-Then(/^I enter (.*) in SignUp email/) do |email|
-  find(:xpath, '//div[@id="signup"]/descendant::input[@name="login"]').send_keys(email)
+When(/^I open Login form/) do
+  find(:id, 'login-b').click
+
+  page.has_field?('login', :type => 'email')
+  page.has_field?('password', :type => 'password')
+  page.has_button?('Login')
 end
 
-Then(/^I enter (.*) in SignUp passwords/) do |password|
-  find(:xpath, '//div[@id="signup"]/descendant::input[@name="password1"]').send_keys(password)
-  find(:xpath, '//div[@id="signup"]/descendant::input[@name="password2"]').send_keys(password)
+And(/^I enter (.*) in Login Email/) do |email|
+  find(:xpath, '//div[@id="login"]/descendant::input[@name="login"]').send_keys(email)
 end
 
-Then(/^I enter (.*) in SignUp project name/) do |name|
-  find(:xpath, '//div[@id="signup"]/descendant::input[@name="project_name"]').send_keys(name)
+And(/^I enter (.*) in Login Password/) do |password|
+  find(:xpath, '//div[@id="login"]/descendant::input[@name="password"]').send_keys(password)
 end
 
-Then(/^I cancel SignUp/) do
-  find(:xpath, '//div[@id="signup"]/descendant::img[@class="closecross"]').click
+And(/^I click on "Login" button/) do
+  find(:xpath, '//div[@id="login"]/form/descendant::button[text()="Login"]').click
+end
+
+Then (/^I wait for page to load/) do
+  find(:id, 'logoutButton').visible?
+  find(:id, 'userEmail').visible?
+  # check if toolbar is displayed
+  all(:xpath, '//div[@id="toolbar"]/div[@class="right-menu"]/child::*').each do |el|
+    el.visible?
+  end
+  # check if middle elements are displayed
+  all(:xpath, '//div[@id="requestViewBuild"]/child::div').each do |el|
+    el.visible?
+  end
+  find(:id, 'stepMainResponseView').visible?
+  # check if right menu is displayed
+  all(:xpath, '//div[@id="rightMenuContainer"]/child::div').each do |el|
+    el.visible?
+  end
+  # check if left menu is displayed
+  all(:xpath, '//div[@class="slideout-menu"]/div/child::div').each do |el|
+    el.visible?
+  end
+end
+
+And(/^I validate Login/) do
+  # check if users email is shown
+  page.has_content?("tdlunlockd@gmail.com")
+  # check if Projects name is shown
+  page.has_content?("Capybara Automation")
+  # check if login form elements are not shown
+  page.has_no_field?('login', :type => 'email')
+  page.has_no_field?('password', :type => 'password')
+  page.has_no_button?('Login')
+  # check if homepage elements are not shown
+  page.has_no_button?('login-b')
+  page.has_no_button?('signup-b')
+  page.has_no_selector?(:id, 'video')
 end
