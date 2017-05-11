@@ -10,4 +10,12 @@ class Element
   def visible?
     find.visible?
   end
+
+  def click
+    find.click
+  end
+
+  def send_keys(value)
+    find.send_keys value
+  end
 end

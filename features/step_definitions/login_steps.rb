@@ -1,28 +1,28 @@
 When(/^I am on Appimation home page/) do
   @pages.page_home.load
-  @pages.page_home.button_start.visible?
-  find(:id, 'login-b').visible?
-  find(:id, 'signup-b').visible?
+  @pages.page_home.visible?
 end
 
 Then(/^I click Try Now/) do
-  find(:id, 'start_button').click
+  @pages.page_home.click_try_now
 end
 
 Then(/^I enter (.*) in SignUp email/) do |email|
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "login"]').send_keys email
+  @pages.page_home.enter_signup_email(email)
 end
 
 Then(/^I enter (.*) in SignUp passwords/) do |password|
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password1"]').send_keys password
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password2"]').send_keys password
+  @pages.page_home.enter_passwords(password)
 end
 
 Then(/^I enter (.*) in SignUp project name/) do |name|
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "project_name"]').send_keys name
+  @pages.page_home.enter_project_name(name)
 end
 
 Then(/^I cancel SignUp/) do
-  find(:xpath, '//div[@id = "signup"]/descendant::img[@class = "closecross"]').click
-  
+  @pages.page_home.cancel_signup
+end
+
+Then(/^I submit signup details/) do
+  @pages.page_home.submit_signup("email@test.com", "parole", "testProject")
 end
