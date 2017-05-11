@@ -1,6 +1,6 @@
 When(/^I am on Appimation home page/) do
-  visit('/')
-  find(:id, 'start_button').visible?
+  @pages.page_home.load
+  @pages.page_home.button_start.visible?
   find(:id, 'login-b').visible?
   find(:id, 'signup-b').visible?
 end

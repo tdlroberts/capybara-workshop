@@ -30,18 +30,8 @@ Capybara.default_driver = :selenium
 # ========================= SCENARIO TEARDOWN ========================#
 
 Before do |scenario|
-  # p Capybara.current_session.driver.current_window_handle
+  @pages = Pages.new
   Capybara.current_session.driver.execute_script("window.resizeTo(1920,1080)")
-  # Capybara.current_session.driver.browser.manage.window.resize_to(1920, 860)
-  # Capybara.current_session.driver.browser.manage.window.maximize
-  # target_size = Selenium::WebDriver::Dimension.new(1024, 768)
-  # p Selenium::WebDriver::Keys.instance_variables
-  # Capybara.current_session.driver.browser.action.send_keys([:command, :control, 'F'])
-  # puts Capybara.current_session.driver.browser.manage.window.methods
-  # within_window(page.driver.browser.window_handles.last) do
-    # target_size = Selenium::WebDriver::Dimension.new(1024, 768)
-  #  p page.driver.browser.action.send_keys(:command, :meta, 'f')
-  # end
   Capybara.ignore_hidden_elements = false
   Capybara.default_max_wait_time = 30
 
