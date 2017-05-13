@@ -1,28 +1,16 @@
-When(/^I am on Appimation home page/) do
+Given(/^I am on Apimation home page/) do
   @pages.page_home.load
-  @pages.page_home.button_start.visible?
-  find(:id, 'login-b').visible?
-  find(:id, 'signup-b').visible?
+  @pages.page_home.visible?
 end
 
-Then(/^I click Try Now/) do
-  find(:id, 'start_button').click
+When(/^I submit signup details: email (.*), password (.*) and project name (.*)/) do |email,password,project_name|
+  @pages.page_home.sumbit_signup(email, password, project_name)
 end
 
-Then(/^I enter (.*) in SignUp email/) do |email|
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "login"]').send_keys email
+When(/^I login with email (.*) and password (.*)/) do |email, password|
+  @pages.page_home.submit_login(email, password)
 end
 
-Then(/^I enter (.*) in SignUp passwords/) do |password|
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password1"]').send_keys password
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password2"]').send_keys password
-end
-
-Then(/^I enter (.*) in SignUp project name/) do |name|
-  find(:xpath, '//div[@id = "signup"]/descendant::input[@name = "project_name"]').send_keys name
-end
-
-Then(/^I cancel SignUp/) do
-  find(:xpath, '//div[@id = "signup"]/descendant::img[@class = "closecross"]').click
-  
+Then(/^I validate login page with email (.*) and project name (.*)/) do |email,project_name|
+  @pages.page_login.visible?(email,project_name)
 end

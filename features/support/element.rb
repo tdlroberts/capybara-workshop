@@ -7,6 +7,14 @@ class Element
     Capybara.find(@value[:type], @value[:value])
   end
 
+  def click
+    find.click
+  end
+
+  def send_keys value
+    find.send_keys value
+  end
+
   def visible?
     find.visible?
   end
