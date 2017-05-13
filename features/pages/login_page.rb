@@ -1,9 +1,9 @@
 class LoginPage < BasePage
 
   def visible?(email, project)
-    @user_email = Element.new(:xpath, "//div[@id = 'userEmail']/descendant::span[contains(text(), '#{email}')]").visible?
-    @project_name = Element.new(:xpath, "//div[@id = 'dropdownMenu1']/descendant::span[contains(text(), '#{project}')]").visible?
-    @test_data_title = Element.new(:id, "testDataTitle").visible?
+    @user_email = Element.new(:xpath, "//div[@id='userEmail']/descendant::span[contains(text(), '#{email}')]").visible?
+    @project_name = Element.new(:xpath, "//div[@id='dropdownMenu1']/descendant::span[contains(text(), '#{project}')]").visible?
+    @test_data_title = Element.new(:xpath, "//div[@id='testDataTitle' and normalize-space(.)='Test Data']").visible?
     @steps_frame = Element.new(:id, "steps").visible?
     @cases_frame = Element.new(:id, "cases").visible?
     @sets_frame = Element.new(:id, "sets").visible?
