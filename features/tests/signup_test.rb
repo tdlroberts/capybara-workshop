@@ -8,9 +8,8 @@ class SignupTest
     home_page_visible?
   end
 
-  def open_signup_form_submit_details
-    @pages.page_home.click_try_now
-    @pages.page_home.submit_signup("email@test.com", "parole", "testProject")
+  def open_signup_form_submit_details(email, password, project_name)
+    @pages.page_home.sumbit_signup(email, password, project_name)
   end
 
   def home_page_visible?
