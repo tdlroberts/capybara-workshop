@@ -1,14 +1,16 @@
 class HomePage < BasePage
-    attr_accessor :button_start
-  def initialize
+ def initialize
     @button_start = Element.new(:id, 'start_button')
-    @button_login = Element.new(:id, 'login-b')
     @button_signup = Element.new(:id, 'signup-b')
-    @input_signup_email = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "login"]')
-    @input_signup_password = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password1"]')
-    @input_signup_password_again = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password2"]')
-    @input_signup_project_name = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "project_name"]')
-    @button_signup_cancel = Element.new(:xpath, '//div[@id = "signup"]/descendant::img[@class = "closecross"]')
+    @button_login = Element.new(:id, 'login-b')
+    @button_submit_login = Element.new(:xpath, '//div[@id="login"]/form/descendant::button[text()="Login"]')
+    @button_close_signup = Element.new(:xpath, '//div[@id = "signup"]/descendant::img[@class = "closecross"]')
+    @input_email_signup = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "login"]')
+    @input_signup_password1 = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password1"]')
+    @input_signup_password2 = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password2"]')
+    @input_project_name = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "project_name"]')
+    @input_email_login = Element.new(:xpath, '//div[@id="login"]/descendant::input[@name="login"]')
+    @input_password_login = Element.new(:xpath, '//div[@id="login"]/descendant::input[@name="password"]')
   end
 
   def visible?
@@ -21,36 +23,60 @@ class HomePage < BasePage
     @button_start.click
   end
 
-  def enter_signup_passwords(password)
-    enter_signup_password(password)
-    enter_signup_password_again(password)
+  def click_login
+    @button_login.click
   end
 
-  def enter_signup_password(password)
-    @input_signup_password.send_keys password
-  end
-
-  def enter_signup_password_again(password)
-    @input_signup_password_again.send_keys password
+  def click_submit_login
+    @button_submit_login.click
   end
 
   def enter_signup_email(email)
-    @input_signup_email.send_keys(email)
+    @input_email_signup.send_keys email
+  end
+
+  def enter_signup_passwords(password)
+    enter_signup_password password
+    enter_signup_password_again password
+  end
+
+  def enter_signup_password password
+    @input_signup_password1.send_keys password
+  end
+
+  def enter_signup_password_again password
+    @input_signup_password2.send_keys password
   end
 
   def enter_signup_project_name(name)
-    @input_signup_project_name.send_keys name
+    @input_project_name.send_keys name
+  end
+
+  def enter_login_email email
+    @input_email_login.send_keys email
+  end
+
+  def enter_login_password password
+    @input_password_login.send_keys password
   end
 
   def cancel_signup
-    @button_signup_cancel.click
+    @button_close_signup.click
   end
 
-  def submit_signup(email, password, project_name)
-    enter_signup_email email
-    enter_signup_passwords password
-    enter_signup_project_name project_name
+  def submit_signup(user)
+    click_try_now
+    enter_signup_email user.email
+    enter_signup_passwords user.password
+    enter_signup_project_name user.project_name
     cancel_signup
+  end
+
+  def submit_login(user)
+    click_login
+    enter_login_email user.email
+    enter_login_password user.password
+    click_submit_login
   end
 
   def load
