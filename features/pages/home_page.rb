@@ -5,6 +5,7 @@ class HomePage < BasePage
     @button_login = Element.new(:id, 'login-b')
     @button_submit_login = Element.new(:xpath, '//div[@id="login"]/form/descendant::button[text()="Login"]')
     @button_close_signup = Element.new(:xpath, '//div[@id = "signup"]/descendant::img[@class = "closecross"]')
+    @button_confirm_signup = Element.new(:xpath, '//div[@id = "signup"]/descendant::button[text()="Get Started"]')
     @input_email_signup = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "login"]')
     @input_signup_password1 = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password1"]')
     @input_signup_password2 = Element.new(:xpath, '//div[@id = "signup"]/descendant::input[@name = "password2"]')
@@ -64,12 +65,15 @@ class HomePage < BasePage
     @button_close_signup.click
   end
 
+  def confirm_signup
+    @button_confirm_signup.click
+  end
+
   def submit_signup(user)
     click_try_now
     enter_signup_email user.email
     enter_signup_passwords user.password
     enter_signup_project_name user.project_name
-    cancel_signup
   end
 
   def submit_login(user)
