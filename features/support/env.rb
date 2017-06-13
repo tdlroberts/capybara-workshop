@@ -9,6 +9,10 @@ require 'json'
 require 'base64'
 require "chromedriver/helper"
 require_relative 'environment'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80e9811997f5e838dda235b98bbcb089fb8f4385
 
 SitePrism.configure do |config|
   config.use_implicit_waits = true

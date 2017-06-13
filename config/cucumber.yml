@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ci: --format <%= ENV['FORMAT'] %> --out <%= ENV['REPORT_PATH'] %>browser<%= ENV['TEST_ENV_NUMBER'] %>.<%= ENV['FORMAT'] %>
+=======
+ci: --format <%= ENV['FORMAT'] %> --out <%= ENV['REPORT_PATH'] %>browser<%= ENV['TEST_ENV_NUMBER'] %>.<%= ENV['FORMAT'] %>
+>>>>>>> 80e9811997f5e838dda235b98bbcb089fb8f4385
