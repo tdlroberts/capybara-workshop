@@ -58,8 +58,8 @@ end
 
 def add_screenshot
   file_name = 'screenshot.png'
-  page.driver.browser.save_screenshot("report/#{file_name}")
-  image = open("report/#{file_name}", 'rb', &:read)
+  page.driver.browser.save_screenshot("#{ENV['REPORT_PATH']}#{file_name}")
+  image = open("#{ENV['REPORT_PATH']}{file_name}", 'rb', &:read)
   encoded_image = Base64.encode64(image)
   embed(encoded_image, 'image/png', 'SCREENSHOT')
 end
